@@ -19,7 +19,9 @@ const searchReducer = (state = '', action) => {
     }
   };
 
-function* getSearch() {
+function* getSearch(action) {
+  console.log('sent payload queryString', action.payload);
+  
     const gifsResponse = yield Axios.get('/api/search');
     yield put({ type: 'SET_GIFS', payload: gifsResponse.data });
 }  

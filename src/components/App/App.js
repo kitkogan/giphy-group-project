@@ -3,19 +3,27 @@ import {connect} from 'react-redux'
 
 class App extends Component {
 
+  state={
+    queryString:''
+  }
   componentDidMount = () => {
     // this.getGifs();
   }
 
   getGifs = () => {
-    this.props.dispatch({type: "GET_SEARCH"});
-    
+    this.props.dispatch({type: "GET_SEARCH", payload:this.state.queryString});
+    this.setState({queryString:''})
   }
-
+handleChange = (event) =>{
+  this.setState({
+    queryString:event.target.value
+  })
+}
   render() {
     return (
       <div>
         <h1>Giphy Search!</h1>
+        <input value={this.state.queryString} placeholder="Query Search" onChange={this.handleChange}></input>
         {/* <p>{JSON.stringify(this.props.reduxState.searchReducer)}</p> */}
         {this.props.reduxState.searchReducer.data &&
         <div>{this.props.reduxState.searchReducer.data.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.images.original.url} height='100px' /></li> )}</div>}

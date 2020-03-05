@@ -19,25 +19,29 @@ const searchReducer = (state = '', action) => {
     }
   };
 
+function* postSearch(action) {
+  try{
+    console.log('in postSearch', action.payload);
+    yield Axios.post('/api/search', action.payload)
+    yield put({
+      type: 'GET_SEARCH'
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function* getSearch(action) {
   console.log('sent payload queryString', action.payload);
   
-    const gifsResponse = yield Axios.get('/api/search');
+    const gifsResponse = yield Axios.get(`/api/search`);
     yield put({ type: 'SET_GIFS', payload: gifsResponse.data });
 }  
-
-// function* postPlants(action) {
-//     try{
-//       yield Axios.post('/api/plant', action.payload);
-//       yield put({type: 'FETCH_PLANTS'}) 
-//   } catch (error){
-//       console.log(error);
-//   }
-//   }
 
   // this is the saga that will watch for actions
 function* watcherSaga() {
     yield takeEvery('GET_SEARCH', getSearch);
+    yield takeEvery('POST_SEARCH', postSearch);
   }
 
 const sagaMiddleware = createSagaMiddleware();

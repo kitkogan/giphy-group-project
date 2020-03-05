@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   getGifs = () => {
-    this.props.dispatch({type: "GET_SEARCH", payload:this.state.queryString});
+    this.props.dispatch({type: "POST_SEARCH", payload:this.state.queryString});
     this.setState({queryString:''})
   }
 handleChange = (event) =>{

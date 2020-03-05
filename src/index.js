@@ -11,6 +11,8 @@ import Axios from 'axios';
 const searchReducer = (state = '', action) => {
     switch (action.type) {
       case 'SET_GIFS':
+        console.log('ACTION PAYLOAD', action.payload);
+        
         return action.payload
       default:
         return state;

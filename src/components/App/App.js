@@ -8,16 +8,17 @@ class App extends Component {
   }
 
   getGifs = () => {
-    this.props.dispatch({type: "GET_SEARCH"})
+    this.props.dispatch({type: "GET_SEARCH"});
+    
   }
 
   render() {
     return (
       <div>
         <h1>Giphy Search!</h1>
-        <p>{JSON.stringify(this.props.reduxState.searchReducer)}</p>
+        {/* <p>{JSON.stringify(this.props.reduxState.searchReducer)}</p> */}
         {this.props.reduxState.searchReducer.data &&
-        <img alt='gif' src={this.props.reduxState.searchReducer.data.image_url} height='400px'/>}
+        <div>{this.props.reduxState.searchReducer.data.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.images.original.url} height='100px' /></li> )}</div>}
         <br></br>
         <br></br>
         <button onClick={this.getGifs}>NEW GIF</button>

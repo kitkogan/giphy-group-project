@@ -8,10 +8,10 @@ import logger from 'redux-logger';
 import { takeEvery, put } from 'redux-saga/effects';
 import Axios from 'axios';
 
-const searchReducer = (state = [], action) => {
+const searchReducer = (state = '', action) => {
     switch (action.type) {
       case 'SET_GIFS':
-        return [ action.payload ]
+        return action.payload
       default:
         return state;
     }
@@ -30,6 +30,7 @@ function* getSearch() {
 //       console.log(error);
 //   }
 //   }
+
   // this is the saga that will watch for actions
 function* watcherSaga() {
     yield takeEvery('GET_SEARCH', getSearch);

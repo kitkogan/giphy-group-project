@@ -4,10 +4,10 @@ import {connect} from 'react-redux'
 class App extends Component {
 
   componentDidMount = () => {
-    this.getGifs();
+    // this.getGifs();
   }
 
-  getGifs() {
+  getGifs = () => {
     this.props.dispatch({type: "GET_SEARCH"})
   }
 
@@ -16,13 +16,18 @@ class App extends Component {
       <div>
         <h1>Giphy Search!</h1>
         <p>{JSON.stringify(this.props.reduxState.searchReducer)}</p>
-        <button>Get New Gif</button>
+        {this.props.reduxState.searchReducer.data &&
+        <img alt='gif' src={this.props.reduxState.searchReducer.data.image_url} height='400px'/>}
+        <br></br>
+        <br></br>
+        <button onClick={this.getGifs}>NEW GIF</button>
+        {/* <button>Get New Gif</button> */}
       </div>
     );
   }
   
 }
-const mapStateToProps = reduxState => ({
+const mapReduxStateToProps = reduxState => ({
   reduxState,
 });
-export default connect(mapStateToProps)(App);
+export default connect(mapReduxStateToProps)(App);

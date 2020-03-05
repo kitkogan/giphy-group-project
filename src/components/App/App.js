@@ -20,6 +20,12 @@ handleChange = (event) =>{
   })
 }
 
+showFavorite = () =>{
+  this.props.dispatch({
+    type: "SHOW_FAVORITE"
+  })
+}
+
 favoriteButton = (event) => {
   console.log(event.target.name)
   this.props.dispatch({
@@ -39,6 +45,7 @@ favoriteButton = (event) => {
         <br></br>
         <br></br>
         <button onClick={this.getGifs}>NEW GIF</button>
+        <button onClick={this.showFavorite}>Show YO FAVS</button>
         {/* <button>Get New Gif</button> */}
       </div>
     );

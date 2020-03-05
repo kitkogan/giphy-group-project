@@ -19,6 +19,16 @@ const searchReducer = (state = '', action) => {
     }
   };
 
+const favoriteReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_FAVORITES':
+      console.log('in favoriteReducer', action.payload);
+    return action.payload
+    default:
+      return state; 
+  }
+}
+
 function* getSearch(action) {
   console.log('sent payload queryString', action.payload);
   
@@ -33,13 +43,22 @@ function* addFavorite(action) {
   } catch (error) {
     console.log(error);
   }
+}
 
+function* getFavorite() {
+  const favoriteResponse = yield Axios.get('/api/favorite')
+  console.log('in the GET getFavorite', favoriteResponse)
+  yield put({
+    type: 'SET_FAVORITES',
+    payload: favoriteResponse
+  })
 }
 
   // this is the saga that will watch for actions
 function* watcherSaga() {
     yield takeEvery('GET_SEARCH', getSearch);
     yield takeEvery('FAVORITE', addFavorite);
+    yield takeEvery('SHOW_FAVORITE', getFavorite);
   }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -50,7 +69,8 @@ const storeInstance = createStore(
     // This function is our first reducer
     // reducer is a function that runs every time an action is dispatched
     combineReducers({
-        searchReducer
+        searchReducer,
+        favoriteReducer
     }),
     applyMiddleware(sagaMiddleware, logger)
 );

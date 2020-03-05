@@ -19,6 +19,14 @@ handleChange = (event) =>{
     queryString:event.target.value
   })
 }
+
+favoriteButton = (event) => {
+  console.log(event.target.name)
+  this.props.dispatch({
+    type: 'FAVORITE',
+    payload: event.target.name
+  })
+}
   render() {
     return (
       <div>
@@ -26,7 +34,8 @@ handleChange = (event) =>{
         <input value={this.state.queryString} placeholder="Query Search" onChange={this.handleChange}></input>
         {/* <p>{JSON.stringify(this.props.reduxState.searchReducer)}</p> */}
         {this.props.reduxState.searchReducer.data &&
-        <div>{this.props.reduxState.searchReducer.data.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.images.original.url} height='100px' /></li> )}</div>}
+        <div>{this.props.reduxState.searchReducer.data.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.images.original.url} height='100px' /><button className='favoriteButton' name={gif.images.original.url} onClick={this.favoriteButton}>Add to Favs</button></li> )}</div>}
+        
         <br></br>
         <br></br>
         <button onClick={this.getGifs}>NEW GIF</button>

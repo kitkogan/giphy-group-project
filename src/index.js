@@ -22,18 +22,9 @@ const searchReducer = (state = '', action) => {
 function* getSearch(action) {
   console.log('sent payload queryString', action.payload);
   
-    const gifsResponse = yield Axios.get('/api/search');
+    const gifsResponse = yield Axios.get('/api/search/' + action.payload);
     yield put({ type: 'SET_GIFS', payload: gifsResponse.data });
 }  
-
-// function* postPlants(action) {
-//     try{
-//       yield Axios.post('/api/plant', action.payload);
-//       yield put({type: 'FETCH_PLANTS'}) 
-//   } catch (error){
-//       console.log(error);
-//   }
-//   }
 
   // this is the saga that will watch for actions
 function* watcherSaga() {

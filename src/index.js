@@ -26,9 +26,20 @@ function* getSearch(action) {
     yield put({ type: 'SET_GIFS', payload: gifsResponse.data });
 }  
 
+function* addFavorite(action) {
+  console.log('in the post addFavorite', action.payload);
+  try {
+    yield Axios.post('/api/favorite', action.payload)
+  } catch (error) {
+    console.log(error);
+  }
+
+}
+
   // this is the saga that will watch for actions
 function* watcherSaga() {
     yield takeEvery('GET_SEARCH', getSearch);
+    yield takeEvery('FAVORITE', addFavorite);
   }
 
 const sagaMiddleware = createSagaMiddleware();

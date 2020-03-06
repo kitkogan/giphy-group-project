@@ -59,7 +59,7 @@ function* deleteFavorite(action) {
   const favoriteResponse = yield Axios.delete(`/api/favorite/${action.payload}`)
   console.log('in the GET getFavorite', favoriteResponse);
   yield put({
-    type: 'SHOW_FAVORITES',
+    type: 'SHOW_FAVORITE',
     
   })
 }

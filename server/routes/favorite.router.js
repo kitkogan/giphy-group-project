@@ -34,7 +34,9 @@ router.put('/:favId', (req, res) => {
 });
 
 // delete a favorite
-router.delete('/', (req, res) => {
+router.delete('/:id', (req, res) => {
+  let queryText = `DELETE FROM "category" WHERE "id" = $1;`;
+  pool.query(queryText,[req.params.id])
   res.sendStatus(200);
 });
 

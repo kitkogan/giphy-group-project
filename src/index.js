@@ -55,11 +55,21 @@ function* getFavorite() {
   })
 }
 
+function* deleteFavorite(action) {
+  const favoriteResponse = yield Axios.delete(`/api/favorite/${action.payload}`)
+  console.log('in the GET getFavorite', favoriteResponse);
+  yield put({
+    type: 'SHOW_FAVORITES',
+    
+  })
+}
+
   // this is the saga that will watch for actions
 function* watcherSaga() {
     yield takeEvery('GET_SEARCH', getSearch);
     yield takeEvery('FAVORITE', addFavorite);
     yield takeEvery('SHOW_FAVORITE', getFavorite);
+    yield takeEvery('DELETE', deleteFavorite);
   }
 
 const sagaMiddleware = createSagaMiddleware();

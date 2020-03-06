@@ -34,7 +34,14 @@ favoriteButton = (event) => {
   })
 }
 
-// deleteFavoriteButton
+deleteFavoriteButton = (event) => {
+  console.log(event.target.name)
+  this.props.dispatch({
+    type: 'DELETE',
+    payload: event.target.name
+  })
+}
+
   render() {
     return (
       <div>
@@ -48,12 +55,10 @@ favoriteButton = (event) => {
         {this.props.reduxState.searchReducer.data &&
         <div>{this.props.reduxState.searchReducer.data.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.images.original.url} height='100px' /><button className='favoriteButton' name={gif.images.original.url} onClick={this.favoriteButton}>Add to Favs</button></li> )}</div>}
 
-        <p>{JSON.stringify(this.props.reduxState.favoriteReducer)}</p>
-        
         {this.props.reduxState.favoriteReducer &&
         <div>{this.props.reduxState.favoriteReducer.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.url} height='100px' />
-        </li> )}</div>}
-        {/* <button className='deleteFavoriteButton' name={gif.id} onClick={this.deleteFavoriteButton}>Delete from Favz</button> */}
+        <button className='deleteFavoriteButton' type="submit" name={gif.id} onClick={this.deleteFavoriteButton}>Delete from Favz</button></li> )}</div>}
+        
         <br></br>
         <br></br>
         

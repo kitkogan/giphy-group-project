@@ -38,8 +38,9 @@ function* getSearch(action) {
 
 function* addFavorite(action) {
   console.log('in the post addFavorite', action.payload);
+  const objectToSend = {url:action.payload}
   try {
-    yield Axios.post('/api/favorite', action.payload)
+    yield Axios.post('/api/favorite', objectToSend)
   } catch (error) {
     console.log(error);
   }

@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   let queryText = `INSERT INTO category ("url") VALUES ($1)`;
   console.log('req.body in favorite post', req.body);
-  pool.query(queryText, [req.body])
+  pool.query(queryText, [req.body.url])
   .then(() => { res.sendStatus(200); })
   .catch((error) => {
     console.log(error);

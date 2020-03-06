@@ -33,6 +33,8 @@ favoriteButton = (event) => {
     payload: event.target.name
   })
 }
+
+// deleteFavoriteButton
   render() {
     return (
       <div>
@@ -42,12 +44,16 @@ favoriteButton = (event) => {
         <button onClick={this.getGifs}>NEW GIF</button>
         <button onClick={this.showFavorite}>Show YO FAVS</button>
         {/* <p>{JSON.stringify(this.props.reduxState.searchReducer)}</p> */}
+
         {this.props.reduxState.searchReducer.data &&
         <div>{this.props.reduxState.searchReducer.data.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.images.original.url} height='100px' /><button className='favoriteButton' name={gif.images.original.url} onClick={this.favoriteButton}>Add to Favs</button></li> )}</div>}
+
         <p>{JSON.stringify(this.props.reduxState.favoriteReducer)}</p>
-        {/* {this.props.reduxState.searchReducer.data &&
-        <div>{this.props.reduxState.searchReducer.data.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.images.original.url} height='100px' /><button className='favoriteButton' name={gif.images.original.url} onClick={this.favoriteButton}>Add to Favs</button></li> )}</div>} */}
         
+        {this.props.reduxState.favoriteReducer &&
+        <div>{this.props.reduxState.favoriteReducer.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.url} height='100px' />
+        </li> )}</div>}
+        {/* <button className='deleteFavoriteButton' name={gif.id} onClick={this.deleteFavoriteButton}>Delete from Favz</button> */}
         <br></br>
         <br></br>
         

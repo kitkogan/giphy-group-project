@@ -37,15 +37,20 @@ favoriteButton = (event) => {
     return (
       <div>
         <h1>Giphy Search!</h1>
+        
         <input value={this.state.queryString} placeholder="Query Search" onChange={this.handleChange}></input>
+        <button onClick={this.getGifs}>NEW GIF</button>
+        <button onClick={this.showFavorite}>Show YO FAVS</button>
         {/* <p>{JSON.stringify(this.props.reduxState.searchReducer)}</p> */}
         {this.props.reduxState.searchReducer.data &&
         <div>{this.props.reduxState.searchReducer.data.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.images.original.url} height='100px' /><button className='favoriteButton' name={gif.images.original.url} onClick={this.favoriteButton}>Add to Favs</button></li> )}</div>}
+        <p>{JSON.stringify(this.props.reduxState.favoriteReducer)}</p>
+        {/* {this.props.reduxState.searchReducer.data &&
+        <div>{this.props.reduxState.searchReducer.data.map(gif=><li key={gif.id}><img alt={gif.url} src={gif.images.original.url} height='100px' /><button className='favoriteButton' name={gif.images.original.url} onClick={this.favoriteButton}>Add to Favs</button></li> )}</div>} */}
         
         <br></br>
         <br></br>
-        <button onClick={this.getGifs}>NEW GIF</button>
-        <button onClick={this.showFavorite}>Show YO FAVS</button>
+        
         {/* <button>Get New Gif</button> */}
       </div>
     );

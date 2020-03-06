@@ -50,7 +50,7 @@ function* getFavorite() {
   console.log('in the GET getFavorite', favoriteResponse)
   yield put({
     type: 'SET_FAVORITES',
-    payload: favoriteResponse
+    payload: favoriteResponse.data
   })
 }
 
